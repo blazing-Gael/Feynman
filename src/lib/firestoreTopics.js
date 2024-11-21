@@ -22,9 +22,31 @@ export const fetchTopics = async (userId) => {
         const querySnapshot = await getDocs(topicsRef);
 
         const topics = [];
-        querySnapshot.forEach((doc) => {
-            topics.push({ id: doc.id, ...doc.data() });
-        });
+        for (const topicDoc of querySnapshot.docs) {
+            const topicData = topicDoc.data();
+
+            // Fetch subtopics for each topic
+            const subtopicsRef = collection(
+                db,
+                "users",
+                userId,
+                "topics",
+                topicDoc.id,
+                "subtopics"
+            );
+            const subtopicsSnapshot = await getDocs(subtopicsRef);
+
+            const subtopics = subtopicsSnapshot.docs.map((doc) => ({
+                id: doc.id,
+                ...doc.data(),
+            }));
+
+            topics.push({
+                id: topicDoc.id,
+                ...topicData,
+                subtopics,
+            });
+        }
 
         return topics;
     } catch (error) {
