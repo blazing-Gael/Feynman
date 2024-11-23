@@ -94,120 +94,47 @@ export default function HomePage({userId}) {
 
 	if (!user) {
     	return (
-        	<div>
-            	<h1>Welcome to the Home Page</h1>
-            	<p>
-                	Please <button onClick={() => setShowLogin(true)}>Log In</button> or{" "}
-                	<button onClick={() => setShowRegister(true)}>Register</button>
-            	</p>
-            	{/* Modal for Login */}
-            	{showLogin && (
-                	<div className="modal">
-                		<LoginPage setShowLogin={setShowLogin} />
-                	</div>
-              	)}
-            	{/* Modal for Register */}
-            	{showRegister && (
-                	<div className="modal">
-                    	<RegisterPage setShowRegister={setShowRegister} />
-                	</div>
-            	)}
-        	</div>
+        	<div className="min-h-screen bg-blue-500 text-white p-6 flex flex-col justify-center items-center">
+				<h1 className="text-4xl font-bold mb-8">Welcome</h1>
+				<div className="space-x-4">
+					<button 
+						className="bg-white text-blue-500 font-semibold px-6 py-2 rounded shadow hover:bg-gray-100"
+						onClick={() => setShowLogin(true)}
+					>
+						Log In
+					</button>
+					<button 
+						className="bg-white text-blue-500 font-semibold px-6 py-2 rounded shadow hover:bg-gray-100"
+						onClick={() => setShowRegister(true)}
+					>
+						Sign Up
+					</button>
+				</div>
+
+				{/* Modal for Login */}
+				{showLogin && (
+					<div className="modal">
+						<LoginPage setShowLogin={setShowLogin} />
+					</div>
+				)}
+
+				{/* Modal for Register */}
+				{showRegister && (
+					<div className="modal">
+						<RegisterPage setShowRegister={setShowRegister} />
+					</div>
+				)}
+			</div>
+
     	);
     }
 
 	return (
-    	// <div>
-
-        // 	<h1>Welcome, {userData?.name || "User"}</h1>
-        // 	<p>Email: {user.email}</p>
-        // 	<p>Username: {userData?.username || "No username"}</p>
-        // 	<button onClick={logoutUser}>Log Out</button>
-        // 	{/* You can add more user details here */}
-
-		// 	<h1>Welcome, here are your topics</h1>
-        //     <AddTopicForm userId={user.uid} onTopicAdded={loadTopics} />
-		// 	<div className="p-6">
-		// 		<h1 className="text-2xl font-bold mb-4">Topics of, {user?.name || "User"}!</h1>
-		// 		<div>
-		// 			{topics.map((topic) => (
-		// 				<div key={topic.id} className="mb-6 border-b pb-4">
-		// 					<h2 className="text-xl font-semibold">{topic.name}</h2>
-		// 					<p>Difficulty: {topic.difficulty}</p>
-		// 					<p>Deadline: {topic.deadline || "No deadline set"}</p>
-		// 					<button
-		// 						className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600"
-		// 						onClick={() => toggleSubtopicForm(topic.id)}
-		// 					>
-		// 						Add Subtopic
-		// 					</button>
-		// 					{subtopicForm[topic.id] && (
-		// 						<div className="mt-2 text-blue-700">
-		// 							<input
-		// 								type="text"
-		// 								placeholder="Subtopic Name"
-		// 								className="border rounded p-1 mr-2"
-		// 								onChange={(e) => handleInputChange(topic.id, "name", e.target.value)}
-		// 							/>
-		// 							<input
-		// 								type="date"
-		// 								className="border rounded p-1 mr-2"
-		// 								onChange={(e) => handleInputChange(topic.id, "deadline", e.target.value)}
-		// 							/>
-		// 							<textarea
-		// 								placeholder="Description"
-		// 								className="border rounded p-1 w-full mt-2"
-		// 								onChange={(e) => handleInputChange(topic.id, "description", e.target.value)}
-		// 							/>
-		// 							<button
-		// 								className="bg-green-500 text-white px-2 py-1 rounded mt-2 hover:bg-green-600"
-		// 								onClick={() => handleAddSubtopic(topic.id)}
-		// 							>
-		// 								Save Subtopic
-		// 							</button>
-		// 						</div>
-		// 					)}
-		// 					<button
-		// 						onClick={() =>
-		// 							setTopics((prev) =>
-		// 								prev.map((t) =>
-		// 									t.id === topic.id
-		// 										? { ...t, expanded: !t.expanded }
-		// 										: t
-		// 								)
-		// 							)
-		// 						}
-		// 						className="text-blue-500"
-		// 					>
-		// 						{topic.expanded ? "Hide Subtopics" : "Show Subtopics"}
-		// 					</button>
-
-		// 					{topic.expanded && (
-		// 						<ul className="mt-4 pl-4">
-		// 							{topic.subtopics.map((sub) => (
-		// 								<li key={sub.id}>
-		// 									<div className="flex justify-between">
-		// 										<span>{sub.name}</span>
-		// 										<span>
-		// 											{sub.completed ? "✅" : "❌"}
-		// 										</span>
-		// 									</div>
-		// 									<p>{sub.description}</p>
-		// 									<p>Deadline: {sub.deadline || "No deadline"}</p>
-		// 								</li>
-		// 							))}
-		// 						</ul>
-		// 					)}
-		// 				</div>
-		// 			))}
-		// 		</div>
-		// 	</div>
-
-    	// </div>
-		<div className="min-h-screen bg-gradient-to-r from-blue-500 to-pink-500 text-white p-6">
+		<div className="min-h-screen bg-gradient-to-br from-blue-400 to-pink-500 text-white p-6">
 			{/* User Info Section */}
 			<div className="flex justify-between items-center mb-8">
 				<div>
+				<h1 className="text-7xl m-5 font-poppins font-bold text-pink-500">feynman</h1>
 				<h1 className="text-3xl font-bold">
 					Welcome, {userData?.name || "User"}!
 				</h1>
@@ -311,6 +238,12 @@ export default function HomePage({userId}) {
 							</div>
 							<p className="text-sm">Deadline: {sub.deadline || "No deadline"}</p>
 							<p className="text-sm italic">{sub.description}</p>
+							<button
+								className="bg-pink-500 text-white px-2 py-1 rounded mt-2 hover:bg-pink-600"
+								onClick={() => setSelectedSubtopic(sub.id)}
+							>
+								Write Blog
+							</button>
 						</li>
 						))}
 					</ul>
